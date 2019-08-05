@@ -1,5 +1,6 @@
 require 'slack-ruby-client'
 require 'inifile'
+require './praiseWords'
 
   # secret.confからTokenを呼び出して接続する
   Slack.configure do |conf|
@@ -20,7 +21,7 @@ require 'inifile'
   @ini = IniFile.load("secret.conf")
   devChId = @ini['devCh']['id']
   praiseCh =  @ini['praiseCh']['id']
-  
+
   # ユーザからのメッセージを検知したときの処理
   client.on :message do |data|
     # 育成チャンネルの場合の処理
@@ -39,7 +40,7 @@ require 'inifile'
     # 称賛チャンネルの場合の処理
     if data['channel'] == praiseCh
       if data['text'].include?('ほめて') || data['text'].include?('褒めて')
-        client.message channel: praiseCh, text: "すごい！"
+        client.message channel: praiseCh, text: getRandomPraiseWord
       end
     end
     
