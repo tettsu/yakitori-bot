@@ -4,8 +4,8 @@ require 'inifile'
   # secret.confからTokenを呼び出して接続する
   Slack.configure do |conf|
     @ini = IniFile.load("secret.conf")
-    val = @ini['secret']['token']  
-    conf.token = val
+    token = @ini['workspace']['token']  
+    conf.token = token
   end
 
   # RTM Clientのインスタンス生成
@@ -14,41 +14,35 @@ require 'inifile'
   # slackに接続できたときの処理
   client.on :hello do
     puts 'connected!'
-    @ini = IniFile.load("secret.conf")
-    val = @ini['channel']['id']  
-    conf.token = val
-    client.message channel: val, text: 'connected!'
   end
 
+  # 対応するチャンネルのIDの準備
+  @ini = IniFile.load("secret.conf")
+  devChId = @ini['devCh']['id']
+  praiseCh =  @ini['praiseCh']['id']
+  
   # ユーザからのメッセージを検知したときの処理
   client.on :message do |data|
-    if data['text'].include?('こんにちは')
-      client.message channel: data['channel'], text: "こんにちは。"
+    # 育成チャンネルの場合の処理
+    if data['channel'] == devChId
+      if data['text'].include?('こんにちは')
+        client.message channel: devChId, text: "こんにちは。"
+      end
+      if data['text'].include?('かしこい') || data['text'].include?('賢い')
+        client.message channel: devChId, text: "ありがとう。"
+      end
+      if data['text'].include?('ムーミン')
+        client.message channel: devChId, text: "https://www.moomin.co.jp/characters/moomintroll"
+      end
     end
-    if data['text'].include?('かしこい') || data['text'].include?('賢い')
-      client.message channel: data['channel'], text: "ありがとう。"
+
+    # 称賛チャンネルの場合の処理
+    if data['channel'] == praiseCh
+      if data['text'].include?('ほめて') || data['text'].include?('褒めて')
+        client.message channel: praiseCh, text: "すごい！"
+      end
     end
-    if data['text'].include?('ムーミン')
-      client.message channel: data['channel'], text: "https://www.moomin.co.jp/characters/moomintroll"
-    end
-    if data['text'].include?('フローレン') || data['text'].include?('スノークのお嬢さん')|| data['text'].include?('スノークのおじょうさん')
-      client.message channel: data['channel'], text: "https://www.moomin.co.jp/characters/snorkmaiden"
-    end
-    if data['text'].include?('スナフキン')
-      client.message channel: data['channel'], text: "https://www.moomin.co.jp/characters/snufkin"
-    end
-    if data['text'].include?('ミィ')
-      client.message channel: data['channel'], text: "https://www.moomin.co.jp/characters/little-my"
-    end
-    if data['text'].include?('スニフ')
-      client.message channel: data['channel'], text: "https://www.moomin.co.jp/characters/sniff"
-    end
-    if data['text'].include?('ムーミンパパ')
-      client.message channel: data['channel'], text: "https://www.moomin.co.jp/characters/moominpappa"
-    end
-    if data['text'].include?('ムーミンママ')
-      client.message channel: data['channel'], text: "https://www.moomin.co.jp/characters/moominmamma"
-    end
+    
   end
 
   # Bot start

@@ -11,4 +11,4 @@ end
 channelName = @ini['channel']['name']
 
 client = Slack::Web::Client.new
-client.chat_postMessage(channel: channelName, text: あああ')
+client.chat_postMessage(channel: channelName, text: 'あああ')
