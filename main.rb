@@ -49,4 +49,4 @@ require './praiseWords'
   end
 
   # Bot start
-  client.start
+  client.start!
