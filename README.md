@@ -4,7 +4,7 @@
 
 スノークのお嬢さん
 
-###
+### start
 
 ```
 ruby main.rb
@@ -18,4 +18,10 @@ set SSL_CERT_FILE=C:\ruby\cacert.pem
 
 ```
 gem install rubygems-update --source http://rubygems.org/
+```
+
+### on heroku
+
+```
+heroku ps:scale yakitori-bot=1
 ```
