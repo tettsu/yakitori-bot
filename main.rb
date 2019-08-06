@@ -2,11 +2,13 @@ require 'slack-ruby-client'
 require 'inifile'
 require './praiseWords'
 
-  # secret.confからTokenを呼び出して接続する
   Slack.configure do |conf|
+    # secret.confから呼び出す版
     # @ini = IniFile.load("secret.conf")
-    # token = @ini['workspace']['token']
+    # token = @ini['yakitori-bot']['token']
     # conf.token = token
+
+    # Herokuの環境変数使う版
     conf.token = ENV['YAKITORI_BOT_TOKEN']
   end
 
@@ -19,9 +21,12 @@ require './praiseWords'
   end
 
   # 対応するチャンネルのIDの準備
+  # secretから読み込む版
   # @ini = IniFile.load("secret.conf")
   # devChId = @ini['devCh']['id']
   # praiseCh =  @ini['praiseCh']['id']
+
+  # 普通にやる版
   devChId = 'CM1GF104D'
 
   # ユーザからのメッセージを検知したときの処理
