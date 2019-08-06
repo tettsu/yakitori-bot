@@ -4,9 +4,10 @@ require './praiseWords'
 
   # secret.confからTokenを呼び出して接続する
   Slack.configure do |conf|
-    @ini = IniFile.load("secret.conf")
-    token = @ini['workspace']['token']  
-    conf.token = token
+    # @ini = IniFile.load("secret.conf")
+    # token = @ini['workspace']['token']
+    # conf.token = token
+    conf.token = 'xoxb-697706279393-699072249683-qtjCmT6h5FtSIRtqGAvBAvuW'
   end
 
   # RTM Clientのインスタンス生成
@@ -18,9 +19,11 @@ require './praiseWords'
   end
 
   # 対応するチャンネルのIDの準備
-  @ini = IniFile.load("secret.conf")
-  devChId = @ini['devCh']['id']
-  praiseCh =  @ini['praiseCh']['id']
+  # @ini = IniFile.load("secret.conf")
+  # devChId = @ini['devCh']['id']
+  # praiseCh =  @ini['praiseCh']['id']
+  devChId = 'CM1GF104D'
+  praiseCh = 'CM1GF104D'
 
   # ユーザからのメッセージを検知したときの処理
   client.on :message do |data|
