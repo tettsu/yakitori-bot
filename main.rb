@@ -7,7 +7,7 @@ require './praiseWords'
     # @ini = IniFile.load("secret.conf")
     # token = @ini['workspace']['token']
     # conf.token = token
-    conf.token = YAKITORI_BOT_TOKEN
+    conf.token = ['YAKITORI_BOT_TOKEN']
   end
 
   # RTM Clientのインスタンス生成
