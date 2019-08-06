@@ -28,23 +28,48 @@ require './praiseWords'
 
   # 普通にやる版
   devChId = 'CM1GF104D'
+  praiseCh = 'CM38CFVL4'
 
   # ユーザからのメッセージを検知したときの処理
   client.on :message do |data|
-    # 育成チャンネルの場合の処理
-    if data['channel'] == devChId
+    # 開発チャンネルまたは称賛チャンネルの共通の処理
+    if data['channel'] == devChId || data['channel'] == praiseCh
       if data['text'].include?('こんにちは')
         client.message channel: devChId, text: "こんにちは。"
       end
-      if data['text'].include?('かしこい') || data['text'].include?('賢い')
-        client.message channel: devChId, text: "ありがとう。"
+      if data['text'].include?('おはよう')
+        client.message channel: devChId, text: "おはよう。"
+      end
+      if data['text'].include?('こんばん')
+        client.message channel: devChId, text: "こんばんわ。"
+      end
+      if data['text'].include?('おやすみ')
+        client.message channel: devChId, text: "おやすみなさい。"
+      end
+      if data['text'].include?('ムーミンパパ')
+        client.message channel: devChId, text: "https://www.moomin.co.jp/characters/moominpappa"
+      end
+      if data['text'].include?('ムーミンママ')
+        client.message channel: devChId, text: "https://www.moomin.co.jp/characters/moominmamma"
+      end
+      if data['text'].include?('スナフキン')
+        client.message channel: devChId, text: "https://www.moomin.co.jp/characters/snufkin"
+      end
+      if data['text'].include?('スニフ')
+        client.message channel: devChId, text: "https://www.moomin.co.jp/characters/sniff"
+      end
+      if data['text'].include?('ミィ') || data['text'].include?('ミイ')
+        client.message channel: devChId, text: "https://www.moomin.co.jp/characters/little-my"
+      end
+      if data['text'].include?('おじょうさん') || data['text'].include?('お嬢さん') || data['text'].include?('ノンノン') || data['text'].include?('フローレン')
+        client.message channel: devChId, text: "https://www.moomin.co.jp/characters/snorkmaiden"
       end
       if data['text'].include?('ムーミン')
         client.message channel: devChId, text: "https://www.moomin.co.jp/characters/moomintroll"
       end
     end
 
-    # 称賛チャンネルの場合の処理
+    # 称賛チャンネルの処理
     if data['channel'] == praiseCh
       if data['text'].include?('ほめて') || data['text'].include?('褒めて')
         client.message channel: praiseCh, text: getRandomPraiseWord
