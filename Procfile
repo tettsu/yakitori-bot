@@ -1,1 +1,1 @@
-app: bundle exec ruby main.rb
+yakitori-bot: ruby main.rb
