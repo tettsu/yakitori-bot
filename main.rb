@@ -86,6 +86,7 @@ require './praiseWords'
       if data['text'].include?('おやすみ')
         client.message channel: praiseCh, text: "おやすみなさい。"
       end
+      
       if data['text'].include?('ムーミンパパ')
         client.message channel: praiseCh, text: "https://www.moomin.co.jp/characters/moominpappa"
       end
