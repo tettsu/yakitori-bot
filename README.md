@@ -1,16 +1,11 @@
 # yakitori-bot
 
-### about
+## about
 
 スノークのお嬢さん
 
-### start
 
-```
-ruby main.rb
-```
-
-### SSL_CERT_FILE
+## SSL_CERT_FILE
 
 ```
 set SSL_CERT_FILE=C:\ruby\cacert.pem
@@ -20,8 +15,19 @@ set SSL_CERT_FILE=C:\ruby\cacert.pem
 gem install rubygems-update --source http://rubygems.org/
 ```
 
+## start
+
+### local
+
+```
+ruby main.rb
+```
+
 ### on heroku
 
 ```
+git add .
+git commit -am "comment."
+git push heroku master
 heroku ps:scale yakitori-bot=1
 ```
